@@ -3,7 +3,7 @@
 [![Dependency Status](https://img.shields.io/david/feathers-plus/cache.svg?style=flat-square)](https://david-dm.org/eddyystop/dataloader-cache-lru)
 [![Download Status](https://img.shields.io/npm/dm/feathers-plus/cache.svg?style=flat-square)](https://www.npmjs.com/package/dataloader-cache-lru)
 
-> LRU (least recently used) cache for Feathers' cache hook and batch-loader
+> LRU (least recently used) cache for @feathers-plus/batch-loader and @feathers-plus/feathers-hooks-common cache hook.
 
 ## Installation
 
@@ -13,25 +13,23 @@ npm install @feathers-plus/cache --save
 
 ## Documentation
 
-BatchLoader, by default, uses the standard Map which simply grows until the BatchLoader is released.
+@feathers-plus/batch-loader, by default, uses the standard Map which simply grows until the BatchLoader is released.
 The default is appropriate when requests to your application are short-lived.
 
-Longer lived BatchLoaders, such as ones which persist between fastJoin hooks queries, will build up memory
+Longer lived BatchLoaders, such as ones which persist between @feathers-plus/feathers-hooks-common fastJoin hook queries, will build up memory
 pressure unless the size of the cache is controlled.
 Furthermore, if records mutate, their cache entries must be removed.
 
 This BatchLoader-compatible cache implements a LRU (least recently used) cache, it deletes the
 least recently used items when the cache size is exceeded.
  
-
-
 ## Complete Example
 
 ```js
 const BatchLoader = require('@feathers-plus/batch-loader');
 const feathersCache = require('@feathers-plus/cache');
 
-const cacheMap = buildLoaderCacheLru({ max: 3 }); // see options in isaacs/node-lru-cache
+const cacheMap = feathersCache({ max: 3 }); // see options in isaacs/node-lru-cache
 const batchLoader = new BatchLoader(batchLoadFn, { cacheMap });
 
 Promise.all(
