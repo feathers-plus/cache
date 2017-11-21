@@ -1,26 +1,26 @@
-# dataloader-cache-lru
+# @feathers-plus/cache
 
-[![Dependency Status](https://img.shields.io/david/eddyystop/dataloader-cache-lru.svg?style=flat-square)](https://david-dm.org/eddyystop/dataloader-cache-lru)
-[![Download Status](https://img.shields.io/npm/dm/dataloader-cache-lru.svg?style=flat-square)](https://www.npmjs.com/package/dataloader-cache-lru)
+[![Dependency Status](https://img.shields.io/david/feathers-plus/cache.svg?style=flat-square)](https://david-dm.org/eddyystop/dataloader-cache-lru)
+[![Download Status](https://img.shields.io/npm/dm/feathers-plus/cache.svg?style=flat-square)](https://www.npmjs.com/package/dataloader-cache-lru)
 
-> LRU (least recently used) cache for Facebook's DataLoader.
+> LRU (least recently used) cache for Feathers' cache hook and batch-loader
 
 ## Installation
 
 ```
-npm install dataloader-cache-lru --save
+npm install @feathers-plus/cache --save
 ```
 
 ## Documentation
 
-DataLoader, by default, uses the standard Map which simply grows until the DataLoader is released.
+BatchLoader, by default, uses the standard Map which simply grows until the BatchLoader is released.
 The default is appropriate when requests to your application are short-lived.
 
-Longer lived DataLoaders, such as ones which persist between GraphQL queries, will build up memory
+Longer lived BatchLoaders, such as ones which persist between fastJoin hooks queries, will build up memory
 pressure unless the size of the cache is controlled.
 Furthermore, if records mutate, their cache entries must be removed.
 
-This DataLoader-compatible cache implements a LRU (least recently used) cache, it deletes the
+This BatchLoader-compatible cache implements a LRU (least recently used) cache, it deletes the
 least recently used items when the cache size is exceeded.
  
 
@@ -28,14 +28,14 @@ least recently used items when the cache size is exceeded.
 ## Complete Example
 
 ```js
-const DataLoader = require('dataloader');
-const dataLoaderCacheLru = require('dataloader-cache-lru');
+const BatchLoader = require('@feathers-plus/batch-loader');
+const feathersCache = require('@feathers-plus/cache');
 
-const cacheMap = dataLoaderCacheLru({ max: 3 }); // see options in isaacs/node-lru-cache
-const dataloader = new DataLoader(batchLoadFn, { cacheMap });
+const cacheMap = buildLoaderCacheLru({ max: 3 }); // see options in isaacs/node-lru-cache
+const batchLoader = new BatchLoader(batchLoadFn, { cacheMap });
 
 Promise.all(
-  ['a', 'b', 'c', 'd', 'e'].map(key => dataloader.load(key))
+  ['a', 'b', 'c', 'd', 'e'].map(key => batchLoader.load(key))
 )
   .then(data => {
     console.log(data); // [{ key: 'a', data: 'a' }, ..., { key: 'e', data: 'e' }]
@@ -43,7 +43,7 @@ Promise.all(
   });
 
 // record with key 'd' has been mutated
-dataloader.clear('d');
+batchLoader.clear('d');
 console.log(cacheMap.keys().sort()); // ['c', 'e']
 
 function batchLoadFn (keys) {
