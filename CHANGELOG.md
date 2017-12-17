@@ -1,5 +1,16 @@
 # Change Log
 
+## [Unreleased](https://github.com/feathers-plus/cache/tree/HEAD)
+
+[Full Changelog](https://github.com/feathers-plus/cache/compare/v1.4.0...HEAD)
+
+**Implemented enhancements:**
+
+- Added hooks to remove keys of mutated records. [\#1](https://github.com/feathers-plus/cache/pull/1) ([eddyystop](https://github.com/eddyystop))
+
+## [v1.4.0](https://github.com/feathers-plus/cache/tree/v1.4.0) (2017-12-17)
+[Full Changelog](https://github.com/feathers-plus/cache/compare/v1.3.1...v1.4.0)
+
 ## [v1.3.1](https://github.com/feathers-plus/cache/tree/v1.3.1) (2017-11-21)
 [Full Changelog](https://github.com/feathers-plus/cache/compare/v1.2.0...v1.3.1)
 
