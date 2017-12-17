@@ -51,6 +51,10 @@ function batchLoadFn (keys) {
 }
 ```
 
+## Note
+
+`lib/hooks` contains hooks to clear the keys of mutated records.
+
 ## License
 
 Copyright (c) 2017
