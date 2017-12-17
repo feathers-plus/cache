@@ -1,7 +1,7 @@
 {
   "name": "@feathers-plus/cache",
   "description": "LRU (least recently used) cache. Compatible with feathers-hooks-common cache hooks and BatchLoader.",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "homepage": "https://github.com/feathers-plus/cache",
   "main": "lib/",
   "keywords": [
